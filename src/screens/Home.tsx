@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, View, FlatList} from 'react-native';
-import Header from './src/components/Header';
-import AddItem, {IItem} from './src/components/AddItem';
-import Item from './src/components/Item';
-const App = () => {
+import Header from '../components/Header';
+import AddItem, {IItem} from '../components/AddItem';
+import Item from '../components/Item';
+import AddButton from '../components/AddButton';
+const App = ({navigation}) => {
   const [shoppingList, setShoppingList] = useState<IItem[]>([]);
   return (
     <SafeAreaView style={styles.container}>
@@ -13,13 +14,8 @@ const App = () => {
           setShoppingList={setShoppingList}
           shoppingList={shoppingList}
         />
-        <FlatList
-          data={shoppingList}
-          keyExtractor={(item, index) => `${item.item}-${index}`}
-          renderItem={({item}) => (
-            <Item item={item.item} quantity={item.quantity} />
-          )}
-        />
+        <AddButton addItem={()=>navigation.navigate("Cart") } text="Cart"/>
+       
       </View>
     </SafeAreaView>
   );

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import {
   View,
   Text,
@@ -7,7 +7,8 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
-
+import AddButton from './AddButton';
+import {AppContext} from '../constants/context';
 export interface IItem {
   item: string;
   quantity: string;
@@ -17,6 +18,7 @@ interface Props {
   shoppingList: IItem[];
 }
 const AddItem: React.FC<Props> = ({shoppingList, setShoppingList}) => {
+  const context = useContext(AppContext);
   const [item, setItem] = useState('');
   const [quantity, setQuantity] = useState('');
   const addItem = () => {
@@ -30,6 +32,7 @@ const AddItem: React.FC<Props> = ({shoppingList, setShoppingList}) => {
           quantity: quantity || '1',
         },
       ]);
+      context.addItemList(shoppingList)
       setItem('');
       setQuantity('');
     }
@@ -41,6 +44,7 @@ const AddItem: React.FC<Props> = ({shoppingList, setShoppingList}) => {
         <TextInput
           style={styles.input}
           placeholder="Enter item"
+          placeholderColor="grey"
           value={item}
           onChangeText={text => setItem(text)}
         />
@@ -53,9 +57,8 @@ const AddItem: React.FC<Props> = ({shoppingList, setShoppingList}) => {
             setQuantity(q);
           }}
         />
-        <TouchableOpacity style={styles.addItemButton} onPress={addItem}>
-          <Text style={styles.buttonText}>Add Item</Text>
-        </TouchableOpacity>
+       
+        <AddButton addItem={addItem} text="Add Item"/>
       </View>
     </View>
   );

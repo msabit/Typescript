@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   },
   itemName: {
     fontWeight: '500',
+    color:"grey"
   },
   quantity: {
     padding: 6,
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden',
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    color:"grey"
   },
 });
 export default Item;
